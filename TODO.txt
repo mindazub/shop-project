@@ -1,0 +1,8 @@
+
+# 2020-03-25
+
+# Products Edit -> photo dissapears if not selected // DONE
+
+# Banners -> TODO
+
+# Ratings -> TODO

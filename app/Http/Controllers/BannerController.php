@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Banner;
+use App\Http\Requests\StoreProductRequest;
+use App\Product;
 use Illuminate\Http\Request;
 
 class BannerController extends Controller
@@ -14,7 +16,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        //
+        $banners = Banner::all();
+        return view('banners.index', compact('banners'));
     }
 
     /**
@@ -24,7 +27,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        //
+        return view('banners.create');
     }
 
     /**
@@ -33,9 +36,19 @@ class BannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBannerRequest $request)
     {
-        //
+        $path = $request->file('banner')->store('banners', 'public');
+
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'photo' => $path
+        ]);
+
+        return redirect()->route('products.index');
     }
 
     /**

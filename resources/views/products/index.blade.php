@@ -20,6 +20,7 @@
                         <td>{{ $product->name }}</td>
                         <td>${{ $product->price }}</td>
                         <td>
+                            <a class="btn btn-info" href="{{ route('products.show', $product->id) }}">Show</a>
                             <a class="btn btn-primary" href="{{ route('products.edit', $product->id) }}">Edit</a>
 
                             <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline">

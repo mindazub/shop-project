@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>Shop Test Project Laravel Daily</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,7 +23,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="{{ route('home') }}">Shop Test Project</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -53,6 +53,9 @@
                         <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('banners.index') }}">Banners</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#" onclick="document.getElementById('logout-form').submit()">Log out</a>
                     </li>
                     <form action="{{ route('logout') }}" method="POST" id="logout-form">
@@ -80,7 +83,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+        <p class="m-0 text-center text-white">Copyright &copy; mindazub 2020</p>
     </div>
     <!-- /.container -->
 </footer>

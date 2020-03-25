@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
@@ -25,8 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $banners = Banner::all();
         $categories = Category::all();
-        return view('index', compact('categories', 'products'));
+        $products = Product::paginate(6);
+        return view('index', compact('categories', 'products', 'banners'));
     }
 }

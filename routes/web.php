@@ -33,4 +33,5 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
+    Route::resource('banners', 'BannerController');
 });
