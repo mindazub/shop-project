@@ -33,6 +33,12 @@
                 @endforeach
             </thead>
         </table>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-3">
+                {{ $products->links() }}
+            </div>
+        </div>
+        </div>
 
     </div>
     <!-- /.col-lg-12 -->

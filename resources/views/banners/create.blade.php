@@ -18,7 +18,7 @@
         <form action="{{ route('banners.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            Banner:
+            <h4>Banner:</h4>
             <br />
             <br />
 

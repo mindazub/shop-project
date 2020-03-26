@@ -3,7 +3,7 @@
 @section('content')
     <div class="col-lg-12">
 
-        <h1 class="my-4">Product</h1>
+        <h1 class="my-4">Benners</h1>
 
         <a href="{{ route('banners.create') }}" class="btn btn-info">New Banner</a>
         <br /><br />
@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ $banner->id }}</td>
                         <td>
-                            <img class="card-img-top"  src="{{ Storage::url($banner->photo) }}" alt="">
+                            <img class="card-img-top"  src="{{ Storage::url($banner->banner) }}" alt="">
                         </td>
                         <td>
                             <form action="{{ route('banners.destroy', $banner->id) }}" method="POST" style="display: inline">

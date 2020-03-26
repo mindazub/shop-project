@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Banner;
-use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\StoreBannerRequest;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -33,22 +33,18 @@ class BannerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreBannerRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBannerRequest $request)
     {
         $path = $request->file('banner')->store('banners', 'public');
 
-        Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'category_id' => $request->category_id,
-            'photo' => $path
+        Banner::create([
+            'banner' =>  $path
         ]);
 
-        return redirect()->route('products.index');
+        return redirect()->route('banners.index');
     }
 
     /**
@@ -91,8 +87,11 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Banner $banner)
+    public function destroy($id)
     {
-        //
+        $banner = Banner::findOrFail($id);
+        $banner->delete();
+
+        return redirect()->route('banners.index');
     }
 }

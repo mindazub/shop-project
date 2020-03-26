@@ -3,6 +3,6 @@
 
 # Products Edit -> photo dissapears if not selected // DONE
 
-# Banners -> TODO
+# Banners -> TODO -> show on first page
 
 # Ratings -> TODO
