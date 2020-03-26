@@ -13,12 +13,28 @@
                 <tr>
                     <th>Name</th>
                     <th>Price</th>
+                    <th>Rating</th>
                     <th></th>
                 </tr>
                 @foreach ($products as $product)
                     <tr>
                         <td>{{ $product->name }}</td>
                         <td>${{ $product->price }}</td>
+                        <td>
+                            <form action="{{ route('products.rate', $product->id) }}" method="GET" >
+                                @method('POST')
+                                @csrf
+                                <select name="rating">
+                                    <option value="" default>Rate Me</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <input type="submit" value="Rate" />
+                            </form>
+                        </td>
                         <td>
                             <a class="btn btn-info" href="{{ route('products.show', $product->id) }}">Show</a>
                             <a class="btn btn-primary" href="{{ route('products.edit', $product->id) }}">Edit</a>

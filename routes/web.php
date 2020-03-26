@@ -31,7 +31,13 @@ Route::get('/contact', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('products/{product}/rate', 'ProductController@storeRating')
+        ->name('products.rate');
+
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
     Route::resource('banners', 'BannerController');
+
+
 });

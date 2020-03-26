@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRatingRequest;
+use App\Rating;
 use App\Category;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
@@ -48,7 +50,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'category_id' => $request->category_id,
-            'photo' => $path
+            'photo' => $path,
         ]);
 
         return redirect()->route('products.index');
@@ -117,5 +119,28 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index');
+    }
+
+    /**
+     * Store the rating from product show page, only the user not admin
+     * @param Product $product
+     * @param StoreRatingRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+//    public function storeRating(StoreRatingRequest $request, $id)
+//    {
+//        Rating::create([
+//            'rating' => $request->rating,
+//            'product_id' => $id
+//        ]);
+//        return redirect()->back();
+//    }
+    public function storeRating(Product $product, StoreRatingRequest $request)
+    {
+        $product->ratings()->create(['rating' => $request->input('rating')]);
+
+        return redirect()->back();
+
     }
 }

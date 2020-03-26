@@ -65,7 +65,7 @@
                         <a href="#"><img class="card-img-top" height="150" src="{{ Storage::url($product->photo) }}" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">{{ $product->name }}</a>
+                                <a href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
                             </h4>
                             <h5>${{ $product->price }}</h5>
                             <p class="card-text">{{ $product->description }}</p>

@@ -46,6 +46,7 @@
                 @endguest
 
                 @auth
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('products.index') }}">Products</a>
                     </li>
@@ -55,6 +56,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('banners.index') }}">Banners</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="document.getElementById('logout-form').submit()">Log out</a>
                     </li>

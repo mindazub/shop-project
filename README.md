@@ -5,9 +5,9 @@
 Simple Shop Project for LaravelDaily team. 
 
 - Products as in video
-- Add Show method in ProductsController
-- Banners crud 
-- Ratings crud
+- Add Show method in ProductsController, show photos on front end
+- Banners crud
+- Ratings crud, only user can set rating
 
 ## Start project
 
