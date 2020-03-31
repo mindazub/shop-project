@@ -47,7 +47,7 @@
 
                 @auth
 
-
+                    @if(Auth::user()->is_admin)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('products.index') }}">Products</a>
                     </li>
@@ -57,7 +57,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('banners.index') }}">Banners</a>
                     </li>
-
+                    @endif
 
                     <li class="nav-item">
                         <a class="nav-link" href="#">{{ Auth::user()->name }}</a>

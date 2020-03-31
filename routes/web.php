@@ -36,9 +36,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('products/{product}/rate', 'ProductController@storeRating')
         ->name('products.rate');
 
-    Route::resource('categories', 'CategoryController');
-    Route::resource('products', 'ProductController');
-    Route::resource('banners', 'BannerController')->except(['show', 'update']);
+    Route::resource('products', 'ProductController')->only(['show']);
+
+    Route::group(['middleware' => 'isAdmin'], function () {
+        Route::resource('categories', 'CategoryController');
+        Route::resource('products', 'ProductController')->except(['show']);
+        Route::resource('banners', 'BannerController')->except(['show', 'update']);
+    });
 
 
 });
