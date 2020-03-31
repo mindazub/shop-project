@@ -11,11 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
-        DB::table('categories')->delete();
-        DB::table('products')->delete();
-        DB::table('banners')->delete();
-
         $this->call(UsersTableSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(ProductSeeder::class);

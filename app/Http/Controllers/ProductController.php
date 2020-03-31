@@ -106,7 +106,9 @@ class ProductController extends Controller
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'category_id' => $request->input('category_id'),
-            'photo' => $request->file('photo') ? $request->file('photo')->store('photos', 'public') : $oldPhotoPath,
+            'photo' => $request->file('photo')
+                ? $request->file('photo')->store('photos', 'public')
+                : $oldPhotoPath,
         ]);
 
         return redirect()->route('products.index');
