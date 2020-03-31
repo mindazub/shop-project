@@ -73,7 +73,12 @@
                             Category: {{ $product->category->name }}
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                            {{ $product->rating }}
+                            <small class="text-muted">
+                                @for($i=0; $i< $product->rating; $i++)
+                                    &#9733;
+                                @endfor
+                            </small>
                         </div>
                     </div>
                 </div>

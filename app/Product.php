@@ -22,7 +22,7 @@ class Product extends Model
 
     public function getRatingAttribute()
     {
-        return ceil($this->ratings()->avg('rate'));
+        return ceil($this->ratings()->avg('rating'));
     }
 
 

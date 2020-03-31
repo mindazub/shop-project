@@ -21,19 +21,17 @@
                         <td>{{ $product->name }}</td>
                         <td>${{ $product->price }}</td>
                         <td>
-                            <form action="{{ route('products.rate', $product->id) }}" method="GET" >
-                                @method('POST')
-                                @csrf
-                                <select name="rating">
-                                    <option value="" default>Rate Me</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                                <input type="submit" value="Rate" />
-                            </form>
+                            <i class="far fa-star fa-stack-1x"></i>
+                            <small class="text-muted">
+
+                            @if($product->rating)
+                                    @for($x=0; $x < $product->rating; $x++)
+                                        &#9733;
+                                    @endfor
+                                @else
+                                    &#9734; &#9734; &#9734; &#9734; &#9734;
+                                @endif
+                            </small>
                         </td>
                         <td>
                             <a class="btn btn-info" href="{{ route('products.show', $product->id) }}">Show</a>

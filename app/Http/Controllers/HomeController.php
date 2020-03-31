@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Rating;
 use App\Banner;
 use App\Category;
 use App\Product;
+use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,9 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $ratings = Rating::all();
         $banners = Banner::all();
         $categories = Category::all();
         $products = Product::paginate(6);
-        return view('index', compact('categories', 'products', 'banners'));
+        return view('index', compact('categories', 'products', 'banners', 'ratings'));
     }
 }
