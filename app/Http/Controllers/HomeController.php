@@ -8,6 +8,7 @@ use App\Category;
 use App\Product;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
@@ -24,9 +25,9 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $ratings = Rating::all();
         $banners = Banner::all();

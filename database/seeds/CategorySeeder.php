@@ -19,10 +19,10 @@ class CategorySeeder extends Seeder
             'name' => 'Audio'
         ]);
         Category::create([
-            'name' => 'Fire'
+            'name' => 'Alarms'
         ]);
         Category::create([
-            'name' => 'Accessories'
+            'name' => 'Smart House'
         ]);
         Category::create([
             'name' => 'Network'

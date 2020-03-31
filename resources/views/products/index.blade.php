@@ -24,13 +24,8 @@
                             <i class="far fa-star fa-stack-1x"></i>
                             <small class="text-muted">
 
-                            @if($product->rating)
-                                    @for($x=0; $x < $product->rating; $x++)
-                                        &#9733;
-                                    @endfor
-                                @else
-                                    &#9734; &#9734; &#9734; &#9734; &#9734;
-                                @endif
+                                {!! $stars = str_repeat("&#9733;", $product->rating) . str_repeat("&#9734;", 5 - $product->rating) !!}
+
                             </small>
                         </td>
                         <td>

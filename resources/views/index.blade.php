@@ -73,11 +73,8 @@
                             Category: {{ $product->category->name }}
                         </div>
                         <div class="card-footer">
-                            {{ $product->rating }}
                             <small class="text-muted">
-                                @for($i=0; $i< $product->rating; $i++)
-                                    &#9733;
-                                @endfor
+                                {!! $stars = str_repeat("&#9733;", $product->rating) . str_repeat("&#9734;", 5 - $product->rating) !!}
                             </small>
                         </div>
                     </div>

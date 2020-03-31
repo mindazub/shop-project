@@ -10,16 +10,25 @@ class Product extends Model
 
     protected $appends = ['rating'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function ratings()
     {
         return $this->hasMany(Rating::class);
     }
 
+    /**
+     * @return float
+     */
     public function getRatingAttribute()
     {
         return ceil($this->ratings()->avg('rating'));

@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRatingRequest;
-use App\Rating;
 use App\Category;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
+use App\Rating;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
 
         $products = Product::paginate(5);
@@ -27,9 +29,9 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $categories = Category::all();
 
@@ -39,18 +41,19 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreProductRequest $request
+     * @return RedirectResponse
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        $path = $request->file('photo')->store('photos', 'public');
+        $path = $request->file('photo') ? $request->file('photo')
+        ->store('photos', 'public') : 'default/700x400.jpg';
 
         Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'category_id' => $request->category_id,
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'category_id' => $request->input('category_id'),
             'photo' => $path,
         ]);
 
@@ -60,22 +63,23 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return View
      */
-    public function show($id)
+    public function show($id): View
     {
+        $rating = Rating::where('product_id', $id);
         $product = Product::findOrFail($id);
-        return view('products.show', compact('product'));
+        return view('products.show', compact('product', 'rating'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return View
      */
-    public function edit($id)
+    public function edit($id): View
     {
 
         $product = Product::findOrFail($id);
@@ -89,19 +93,19 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
         $product = Product::findOrFail($id);
 
         $oldPhotoPath = $product->photo;
 
         $product->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'category_id' => $request->category_id,
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'category_id' => $request->input('category_id'),
             'photo' => $request->file('photo') ? $request->file('photo')->store('photos', 'public') : $oldPhotoPath,
         ]);
 
@@ -112,9 +116,9 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $product = Product::findOrFail($id);
         $product->delete();
@@ -126,18 +130,10 @@ class ProductController extends Controller
      * Store the rating from product show page, only the user not admin
      * @param Product $product
      * @param StoreRatingRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
 
-//    public function storeRating(StoreRatingRequest $request, $id)
-//    {
-//        Rating::create([
-//            'rating' => $request->rating,
-//            'product_id' => $id
-//        ]);
-//        return redirect()->back();
-//    }
-    public function storeRating(Product $product, StoreRatingRequest $request)
+    public function storeRating(Product $product, StoreRatingRequest $request): RedirectResponse
     {
         $product->ratings()->create(['rating' => $request->input('rating')]);
 

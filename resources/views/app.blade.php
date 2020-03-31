@@ -47,6 +47,7 @@
 
                 @auth
 
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('products.index') }}">Products</a>
                     </li>
@@ -55,6 +56,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('banners.index') }}">Banners</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
                     </li>
 
                     <li class="nav-item">

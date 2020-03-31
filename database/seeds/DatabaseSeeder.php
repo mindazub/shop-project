@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->delete();
         DB::table('categories')->delete();
+        DB::table('products')->delete();
+        DB::table('banners')->delete();
 
         $this->call(UsersTableSeeder::class);
         $this->call(CategorySeeder::class);

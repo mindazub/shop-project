@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
-    Route::resource('banners', 'BannerController');
+    Route::resource('banners', 'BannerController')->except(['show', 'update']);
 
 
 });

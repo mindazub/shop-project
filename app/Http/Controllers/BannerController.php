@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Banner;
 use App\Http\Requests\StoreBannerRequest;
-use App\Product;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $banners = Banner::all();
         return view('banners.index', compact('banners'));
@@ -23,9 +23,9 @@ class BannerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view('banners.create');
     }
@@ -34,11 +34,12 @@ class BannerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreBannerRequest $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(StoreBannerRequest $request)
+    public function store(StoreBannerRequest $request): RedirectResponse
     {
-        $path = $request->file('banner')->store('banners', 'public');
+        $path = $request->file('banner')
+            ? $request->file('banner')->store('banners', 'public') :'default/900x350.png';
 
         Banner::create([
             'banner' =>  $path
@@ -48,46 +49,12 @@ class BannerController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Banner  $banner
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Banner $banner)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Banner  $banner
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Banner $banner)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Banner  $banner
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Banner $banner)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Banner  $banner
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $banner = Banner::findOrFail($id);
         $banner->delete();
